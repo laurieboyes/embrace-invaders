@@ -11,7 +11,7 @@ var game = {
     // Run on page load.
     "onload": function () {
         // Initialize the video.
-        if (!me.video.init("screen", 480, 320, true, 'auto')) {
+        if (!me.video.init("screen", 640, 480, true, 'auto')) {
             alert("Your browser does not support HTML5 canvas.");
             return;
         }
@@ -38,8 +38,10 @@ var game = {
 
     // Run on game resources loaded.
     "loaded": function () {
-        me.state.set(me.state.MENU, new game.TitleScreen());
+
         me.state.set(me.state.PLAY, new game.PlayScreen());
+
+        me.entityPool.add("mainTortoise", game.TortoiseEntity);
 
         // Start the game.
         me.state.change(me.state.PLAY);
