@@ -10,19 +10,19 @@ game.TortoiseEntity = me.ObjectEntity.extend({
         // call the constructor
         this.parent(x, y, settings);
 
-        // set the default horizontal & vertical speed (accel vector)
-        this.setVelocity(3, 0);
+        this.setVelocity(1, 0);
+        this.setMaxVelocity(10,0);
 
     },
 
     update: function () {        
         
         if (me.input.isKeyPressed('left')) {
-            this.vel.x = -this.accel.x;
+            this.vel.x -= this.accel.x * me.timer.tick;
             this.flipX(false);
             
         } else if (me.input.isKeyPressed('right')) {
-            this.vel.x = this.accel.x;
+            this.vel.x += this.accel.x * me.timer.tick;
             this.flipX(true);
         }
         else {
