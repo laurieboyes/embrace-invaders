@@ -1,6 +1,6 @@
 game.TortoiseEntity = me.ObjectEntity.extend({
 
-    init: function(x, y, settings) {
+    init: function (x, y, settings) {
 
         settings.image = 'tortoise';
         settings.spritewidth = 64;
@@ -11,11 +11,29 @@ game.TortoiseEntity = me.ObjectEntity.extend({
         this.parent(x, y, settings);
 
         // set the default horizontal & vertical speed (accel vector)
-        this.setVelocity(0, 0);
+        this.setVelocity(3, 0);
 
-        // set the display to follow our position on both axis
-        me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
+    },
 
+    update: function () {        
+        
+        if (me.input.isKeyPressed('left')) {
+            this.vel.x = -this.accel.x;
+            this.flipX(false);
+            
+        } else if (me.input.isKeyPressed('right')) {
+            this.vel.x = this.accel.x;
+            this.flipX(true);
+        }
+        else {
+            this.vel.x = 0;
+        }
+
+        this.updateMovement();
+
+        return true;
     }
+
+
 
 });
